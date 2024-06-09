@@ -12,7 +12,7 @@ class TripAgents():
   def __init__(self):
         self.OpenAIGPT35 = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
         self.OpenAIGPT4 = ChatOpenAI(model_name="gpt-4o", temperature=0.7)
-        self.Ollama = Ollama(model="openhermes")
+        self.Ollama = Ollama(model="llama3", base_url="172.17.0.3:11434")
 
 
 
@@ -26,7 +26,7 @@ class TripAgents():
             SearchTools.search_internet,
             #BrowserTools.scrape_and_summarize_website,
         ],
-        llm=self.OpenAIGPT4,
+        llm=self.Ollama,
         verbose=True)
 
   def local_expert(self):
@@ -40,7 +40,7 @@ class TripAgents():
             #BrowserTools.scrape_and_summarize_website,
         ]
         ,
-        llm=self.OpenAIGPT4,
+        llm=self.Ollama,
         verbose=True)
 
   def travel_concierge(self):
@@ -55,5 +55,5 @@ class TripAgents():
             # BrowserTools.scrape_and_summarize_website,
             CalculatorTools.calculate,
         ],
-        llm=self.OpenAIGPT4,
+        llm=self.Ollama,
         verbose=True)

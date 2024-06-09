@@ -8,7 +8,7 @@ from tools.calculator_tools import CalculatorTools
 from tools.search_tools import SearchTools
 
 
-class TripAgents():
+class CityAgents():
   def __init__(self):
         self.OpenAIGPT35 = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.7)
         self.OpenAIGPT4 = ChatOpenAI(model_name="gpt-4o", temperature=0.7)
@@ -19,9 +19,9 @@ class TripAgents():
   def city_selection_agent(self):
     return Agent(
         role='City Selection Expert',
-        goal='Select the best city based on weather, season, and prices',
+        goal='Select the best city based specific sustainability criteria',
         backstory=
-        'An expert in analyzing travel data to pick ideal destinations',
+        'An expert in analyzing city plans and sustainability data to pick ideal destinations',
         tools=[
             SearchTools.search_internet,
             #BrowserTools.scrape_and_summarize_website,
@@ -34,7 +34,7 @@ class TripAgents():
         role='Local Expert at this city',
         goal='Provide the BEST insights about the selected city',
         backstory="""A knowledgeable local guide with extensive information
-        about the city, it's attractions and customs""",
+        about the city, it's projects, sutainability initiatives and customs""",
         tools=[
             SearchTools.search_internet,
             #BrowserTools.scrape_and_summarize_website,
@@ -45,10 +45,9 @@ class TripAgents():
 
   def travel_concierge(self):
     return Agent(
-        role='Amazing Travel Concierge',
-        goal="""Create the most amazing travel itineraries with budget and 
-        packing suggestions for the city""",
-        backstory="""Specialist in travel planning and logistics with 
+        role='Neighbourhood Expert',
+        goal="""Knows the details about the neighbourhood and can provide insights on the best places to visit, eat and stay""",
+        backstory="""Specialist in neighbourhood engagement and co-creation with 
         decades of experience""",
         tools=[
             SearchTools.search_internet,

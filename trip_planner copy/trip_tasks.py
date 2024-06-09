@@ -3,9 +3,9 @@ from textwrap import dedent
 from datetime import date
 
 
-class TravelTasks():
+class TripTasks():
 
-  def identify_city(self, agent, origin, cities, interests, date_range):
+  def identify_task(self, agent, origin, cities, interests, range):
     return Task(description=dedent(f"""
         Analyze and select the best city for the trip based 
         on specific criteria such as weather patterns, seasonal
@@ -22,12 +22,12 @@ class TravelTasks():
 
         Traveling from: {origin}
         City Options: {cities}
-        Trip Date: {date_range}
+        Trip Date: {range}
         Traveler Interests: {interests}
       """),
-      agent=agent)
+                agent=agent)
 
-  def gather_city_info(self, agent, origin, interests, date_range):
+  def gather_task(self, agent, origin, interests, range):
     return Task(description=dedent(f"""
         As a local expert on this city you must compile an 
         in-depth guide for someone traveling there and wanting 
@@ -46,13 +46,13 @@ class TravelTasks():
         tailored to enhance the travel experience.
         {self.__tip_section()}
 
-        Trip Date: {date_range}
+        Trip Date: {range}
         Traveling from: {origin}
         Traveler Interests: {interests}
       """),
-      agent=agent)
+                agent=agent)
 
-  def plan_itinerary(self, agent, origin, interests, date_range):
+  def plan_task(self, agent, origin, interests, range):
     return Task(description=dedent(f"""
         Expand this guide into a a full 7-day travel 
         itinerary with detailed per-day plans, including 
@@ -73,11 +73,11 @@ class TravelTasks():
         TRIP EVER, Be specific and give it a reason why you picked
         # up each place, what make them special! {self.__tip_section()}
 
-        Trip Date: {date_range}
+        Trip Date: {range}
         Traveling from: {origin}
         Traveler Interests: {interests}
       """),
-      agent=agent)
+                agent=agent)
 
   def __tip_section(self):
     return "If you do your BEST WORK, I'll tip you $100!"

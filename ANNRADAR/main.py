@@ -1,7 +1,7 @@
 from crewai import Crew
 from textwrap import dedent
-from trip_agents import TripAgents
-from trip_tasks import TripTasks
+from trip_agents import CityAgents
+from trip_tasks import CityTasks
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,8 +15,8 @@ class TripCrew:
     self.date_range = date_range
 
   def run(self):
-    agents = TripAgents()
-    tasks = TripTasks()
+    agents = CityAgents()
+    tasks = CityTasks()
 
     city_selector_agent = agents.city_selection_agent()
     local_expert_agent = agents.local_expert()
@@ -54,29 +54,29 @@ class TripCrew:
     return result
 
 if __name__ == "__main__":
-  print("## Welcome to Trip Planner Crew")
+  print("## Welcome to City Planner Crew")
   print('-------------------------------')
   location = input(
     dedent("""
-      From where will you be traveling from?
+      Which area are you considering to explore?
     """))
-  cities = input(
+  dimensions = input(
     dedent("""
-      What are the cities options you are interested in visiting?
+      What are the cities sustainability dimensions you are interested in?
     """))
   date_range = input(
     dedent("""
-      What is the date range you are interested in traveling?
+      What is the date range you are interested in?
     """))
   interests = input(
     dedent("""
-      What are some of your high level interests and hobbies?
+      What are some of your high level interests?
     """))
   
-  trip_crew = TripCrew(location, cities, date_range, interests)
+  trip_crew = TripCrew(location, dimensions, date_range, interests)
   result = trip_crew.run()
   print("\n\n########################")
-  print("## Here is you Trip Plan")
+  print("## Here is your report")
   print("########################\n")
   print(result)
   quit()
